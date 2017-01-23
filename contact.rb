@@ -26,7 +26,7 @@ class Contact
   end
 
   # This method should return all of the existing contacts
-  def self.all
+  def self.all  #works
     @@contacts.each do |contact|
     puts "#{contact.first_name} #{contact.last_name}"
     end
@@ -34,7 +34,7 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find(contact_id)
+  def self.find(contact_id)   #works
       @@contacts.each do |contact|
         if contact_id == contact.id
           puts "#{contact.first_name} #{contact.last_name}"
@@ -48,42 +48,46 @@ class Contact
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def self.update
-    puts "Please provide id of contact you would like to update?"
-    contact_id =gets.chomp
-    puts "What attribute would you like to change [first_name, last_name, email, or note]?"
-    contact_attr =gets.chomp
-    puts "What is the new value?"
-    new_value =gets.chomp
+  def self.update(contact_id, attr_name, new_value)
     @@contacts.each do |contact|
       if contact_id == contact.id
-        index_value = @@contacts.index(contact_attr)
-        @@contacts = @@contacts[index_value] = new_value  #not working :(
-        #@@contacts[contact_attr] = new_value
+        @@contacts = @@contacts[attr_name] = new_value
+        #index_value = @@contacts.index(attr_name)
+        #@@contacts = @@contacts[index_value] = new_value  #not working :(
       end
-    end)
+    end
   end
 
   # This method should work similarly to the find method above
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by (attr_name, attr_value)
+  def self.find_by(attr_name, attr_value)     #works
     @@contacts.each do |contact|
-      if contact.attr_name == attr_value
+      if attr_name == "first_name" && contact.first_name == attr_value
+        #contact.[attr_name] == attr_value      #not working
+        puts "#{contact.first_name} #{contact.last_name}"
+      elsif
+        attr_name == "last_name" && contact.last_name == attr_value
+        puts "#{contact.first_name} #{contact.last_name}"
+      elsif
+        attr_name == "email" && contact.email == attr_value
+        puts "#{contact.first_name} #{contact.last_name}"
+      elsif
+        attr_name == "note" && contact.note == attr_value
         puts "#{contact.first_name} #{contact.last_name}"
       end
     end
   end
 
   # This method should delete all of the contacts
-  def self.delete_all
+  def self.delete_all   #works
     @@contacts = []
   end
 
-  def full_name (name)
-    @@contacts.each do |contact|
-      if contact.first_name == name
+  def self.full_name(name) #added self - works
+    @@contacts.each do |contact|   #works
+      if name == contact.first_name
         puts "#{contact.first_name} #{contact.last_name}"
       end
     end
@@ -91,10 +95,8 @@ class Contact
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def delete (name)
-    @@contacts.each do |contact|
-      contact.first_name = name
-      @@contacts.delete(name)
+  def self.delete (name) #added self   works.
+    @@contacts.delete_if {|contact| contact.first_name == name}
   end
 
   # Feel free to add other methods here, if you need them.
