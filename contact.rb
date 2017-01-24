@@ -100,6 +100,6 @@ end
 
 
 # Test Inputs
-#Contact.create("Betty", "B", "EmailB", "NoteB")
-#Contact.create("Chuck", "C", "EmailC", "NoteC")
-#Contact.create("Don", "D", "EmailD", "NoteD")
+Contact.create("Betty", "B", "EmailB", "NoteB")
+Contact.create("Chuck", "C", "EmailC", "NoteC")
+Contact.create("Don", "D", "EmailD", "NoteD")
